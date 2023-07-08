@@ -15,6 +15,7 @@ snowflake-id = "^0.0.4"
 cyksuid = "^2.0.2"
 ulid-py = "^1.1.0"
 psycopg2-binary = "^2.9.6"
+uuid7 = "^0.1.0"
 
 [build-system]
 requires = ["poetry-core"]

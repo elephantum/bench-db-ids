@@ -5,6 +5,7 @@ import snowflake
 import ulid
 from cyksuid.v2 import ksuid
 from sqlalchemy import Column, MetaData, String, Table, create_engine, text
+from uuid_extensions import uuid7str
 
 metadata = MetaData()
 test_table = Table(
@@ -69,6 +70,7 @@ snowflake_gen = snowflake.SnowflakeGenerator(1)
 
 ID_GENERATORS = [
     pytest.param(uuid.uuid4, id="uuid4"),
+    pytest.param(uuid7str, id="uuid7"),
     pytest.param(ulid.new, id="ulid"),
     pytest.param(lambda: next(snowflake_gen), id="snowflake"),
     pytest.param(ksuid, id="ksuid"),
