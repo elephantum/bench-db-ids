@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "bench-db-ids"
+version = "0.1.0"
+description = ""
+authors = ["Andrey Tatarinov <a@tatarinov.co>"]
+readme = "README.md"
+packages = [{include = "bench_db_ids"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+sqlalchemy = "^2.0.18"
+pytest = "^7.4.0"
+pytest-benchmark = "^4.0.0"
+snowflake-id = "^0.0.4"
+cyksuid = "^2.0.2"
+ulid-py = "^1.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
