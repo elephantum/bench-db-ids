@@ -43,7 +43,7 @@ def db_sqlite():
 
 @pytest.fixture
 def db_postgres():
-    eng = create_engine("postgresql://postgres:postgres@localhost:5432/postgres")
+    eng = create_engine("postgresql://postgres:postgres@postgres:5432/postgres")
 
     with eng.begin() as conn:
         conn.execute(
@@ -79,16 +79,17 @@ ID_GENERATORS = [
 def test_sqlite_performance(benchmark, db_sqlite, id_generator):
     @benchmark
     def run():
-        data = [{"id": str(id_generator()), "data": "some data"} for _ in range(1000)]
+        data = [{"id": str(id_generator()), "data": "some data"} for _ in range(10_000)]
 
         with db_sqlite.begin() as conn:
             conn.execute(test_table.insert(), data)
 
 
+@pytest.mark.parametrize("id_generator", ID_GENERATORS)
 def test_postgres_performance(benchmark, db_postgres, id_generator):
     @benchmark
     def run():
-        data = [{"id": str(id_generator()), "data": "some data"} for _ in range(1000)]
+        data = [{"id": str(id_generator()), "data": "some data"} for _ in range(10_000)]
 
         with db_postgres.begin() as conn:
             conn.execute(test_table.insert(), data)
