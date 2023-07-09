@@ -4,32 +4,42 @@ platform linux -- Python 3.11.4, pytest-7.4.0, pluggy-1.2.0
 benchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=2 min_time=5 max_time=10 calibration_precision=10 warmup=False warmup_iterations=100000)
 rootdir: /workspaces/bench-db-ids
 plugins: benchmark-4.0.0
-collected 10 items                                                                                                                                                                                                                                                                      
+collected 15 items                                                                                                                                                                                                                                                                      
 
-bench.py ..........                                                                                                                                                                                                                                                               [100%]
+bench.py ...............                                                                                                                                                                                                                                                          [100%]
 
+
+----------------------------- benchmark 'test_id_generator': 5 tests ----------------------------
+Name (time in ns)                      Mean            OPS (Kops/s)            Rounds  Iterations
+-------------------------------------------------------------------------------------------------
+test_id_generator[ksuid]           538.8926 (1.0)        1,855.6575 (1.0)           2    10000000
+test_id_generator[snowflake]       685.5529 (1.27)       1,458.6766 (0.79)          2    10000000
+test_id_generator[ulid]          1,423.7043 (2.64)         702.3931 (0.38)          2    10000000
+test_id_generator[uuid4]         1,916.9987 (3.56)         521.6488 (0.28)          2    10000000
+test_id_generator[uuid7]         2,456.3054 (4.56)         407.1155 (0.22)          2     2178855
+-------------------------------------------------------------------------------------------------
 
 ------------------------- benchmark 'test_postgres_performance': 5 tests ------------------------
-Name (time in ms)                            Mean               OPS            Rounds  Iterations
+Name (time in ms)                           Mean                OPS            Rounds  Iterations
 -------------------------------------------------------------------------------------------------
-test_postgres_performance[snowflake]     134.4278 (1.0)      7.4389 (1.0)           2         100
-test_postgres_performance[uuid7]         146.1883 (1.09)     6.8405 (0.92)          2         100
-test_postgres_performance[ksuid]         155.2389 (1.15)     6.4417 (0.87)          2         100
-test_postgres_performance[ulid]          185.7160 (1.38)     5.3846 (0.72)          2         100
-test_postgres_performance[uuid4]         218.1206 (1.62)     4.5846 (0.62)          2         100
+test_postgres_performance[snowflake]     14.3014 (1.0)      69.9231 (1.0)           2        1000
+test_postgres_performance[uuid7]         15.7841 (1.10)     63.3547 (0.91)          2        1000
+test_postgres_performance[ulid]          19.3933 (1.36)     51.5643 (0.74)          2        1000
+test_postgres_performance[ksuid]         19.6113 (1.37)     50.9910 (0.73)          2        1000
+test_postgres_performance[uuid4]         20.7012 (1.45)     48.3063 (0.69)          2        1000
 -------------------------------------------------------------------------------------------------
 
 -------------------------- benchmark 'test_sqlite_performance': 5 tests --------------------------
 Name (time in ms)                            Mean                OPS            Rounds  Iterations
 --------------------------------------------------------------------------------------------------
-test_sqlite_performance[snowflake]        74.1046 (1.0)      13.4944 (1.0)           2         100
-test_sqlite_performance[uuid7]            93.4647 (1.26)     10.6992 (0.79)          2         100
-test_sqlite_performance[ulid]            134.9218 (1.82)      7.4117 (0.55)          2         100
-test_sqlite_performance[ksuid]           242.5431 (3.27)      4.1230 (0.31)          2         100
-test_sqlite_performance[uuid4]         4,531.3301 (61.15)     0.2207 (0.02)          2          10
+test_sqlite_performance[snowflake]        23.0087 (1.0)      43.4619 (1.0)           2        1000
+test_sqlite_performance[uuid7]            25.5947 (1.11)     39.0705 (0.90)          2         194
+test_sqlite_performance[ulid]             29.2742 (1.27)     34.1598 (0.79)          2         180
+test_sqlite_performance[ksuid]            73.1443 (3.18)     13.6716 (0.31)          2         100
+test_sqlite_performance[uuid4]         1,040.4727 (45.22)     0.9611 (0.02)          2         100
 --------------------------------------------------------------------------------------------------
 
 Legend:
   Outliers: 1 Standard Deviation from Mean; 1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile.
   OPS: Operations Per Second, computed as 1 / Mean
-============================================================================================================================ 10 passed in 539.92s (0:08:59) =============================================================================================================================
+============================================================================================================================ 15 passed in 863.15s (0:14:23) =============================================================================================================================
